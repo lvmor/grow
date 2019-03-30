@@ -7,9 +7,23 @@ PORT = 8000
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('layout.html')
+    with open("books.json") as json_data:
+        books_data = json.load(json_data)
+        return render_template("books.html", books_template = books_data)
+
+@app.route("/books")
+@app.route("/books/")
+@app.route("/books/<book_id>")
+def books(book_id = None):
+    with open ('books.json') as json_data:
+        books_data = json.load(json_data)
+        if book_id == None:
+            return render_template("books.html", books_template = books_data)
+        else:
+            book_ID = int(book_id)
+            return render_template("book.html", book_template = book_id[book_ID])
 
 if __name__ == '__main__':
     app.run(debug=DEBUG, port=PORT)
