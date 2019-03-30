@@ -1,7 +1,19 @@
 {% extends "layout.html"%}
 
 {% block content %}
-
 <h1>Books Template</h1>
+
+{% for book in books_template %}
+<article>
+    <div>
+        {{ book.image }}
+    </div>
+    <div>
+        {{ book.title }}
+    </div>
+    <br>
+</article>
+
+{% endfor %}
 
 {% endblock %}
