@@ -6,7 +6,7 @@
 {% for book in books_template %}
 <article>
     <div>
-        {{ book.image }}
+        <a href={{url_for("books", book=book.id)}}>{{ book.image }}</a>
     </div>
     <div>
         {{ book.title }}
