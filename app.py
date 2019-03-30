@@ -23,7 +23,7 @@ def books(book_id = None):
             return render_template("books.html", books_template = books_data)
         else:
             book_ID = int(book_id)
-            return render_template("book.html", book_template = book_id[book_ID])
+            return render_template("book.html", book = books_data[book_ID])
 
 if __name__ == '__main__':
     app.run(debug=DEBUG, port=PORT)
