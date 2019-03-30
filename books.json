@@ -3,16 +3,18 @@
         "title": "Think and Grow Rich",
         "image": "think-and-grow-rich.png",
         "author": "Napoleon Hill",
-        "ISBN-10": "9780449214923",
-        "current-page": 1,
-        "total-pages": 254
+        "ISBN_10": "9780449214923",
+        "current_page": 1,
+        "total_pages": 254,
+        "id": 0
     },
     {
         "title": "The Alchemist",
         "image": "the-alchemist.png",
         "author": "Paulo Coelho",
-        "ISBN-10": "0062315005",
-        "current-page": 1,
-        "total-pages": 208
+        "ISBN_10": "0062315005",
+        "current_page": 1,
+        "total_pages": 208,
+        "id": 1
     }
 ]
