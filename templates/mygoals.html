@@ -1,0 +1,15 @@
+{% extends "layout.html"%}
+
+{% block content %}
+
+<h1>My Goals Template</h1>
+
+<section>
+    <h1> Name: {{ goal.user_id }}</h1>
+    <h2> Book: {{ goal.book_id }} </h2>
+    <h2> Start date: {{ goal.start_date }} </h2>
+    <h2> End date: {{ goal.end_date }} </h2>
+    <h2> Book Progress: {{ goal.book_progress }} </h2>
+</section>
+
+{% endblock %}
