@@ -59,6 +59,11 @@ def mygoals(goal_id = None):
             goal_ID = int(goal_id)
             return render_template("mygoal.html", goal = goals_data[goal_ID])
 
+@app.route("/achievements")
+@app.route("/achievements/")
+def achievements():
+    return render_template("achievements.html")
+
 if __name__ == '__main__':
     # models.initialize()
     app.run(debug=DEBUG, port=PORT)
