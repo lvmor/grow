@@ -6,15 +6,17 @@
         "end_date": "2019-08-20",
         "book_progress": "current_page/totalpages",
         "status": "In-progress",
-        "total_books_read": 10
+        "total_books_read": 10,
+        "notes": "my goal is to do this"
     },
     {
         "user_id": 0,
-        "book_id": 2,
+        "book_id": 3,
         "start_date": "2019-04-02",
         "end_date": "2019-05-20",
         "book_progress": "current_page/totalpages",
         "status": "Complete",
-        "total_books_read": 20
+        "total_books_read": 20,
+        "notes": "very on point"
     }
 ]
