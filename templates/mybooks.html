@@ -1,12 +1,15 @@
-{% block mybooks %}
+{% extends "layout.html"%}
+
+{% block content %}
 
 <h1>My Books Template</h1>
 
-<div>
-    {{ user.avatar }}
-    {{ user.name }}
-    {{ user.genre }}
-</div>
+<section>
+    <span>{{ user.avatar }}</span>
+    <h2>Name: {{ user.name }}</h2>
+    <h2>Genre: {{ user.genre }}</h2>
+</section>
+
 {% block user_info %}
 {% endblock %}
 
