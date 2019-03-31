@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<form method="POST" action="" nonvalidate>
+    {{ form.hidden_tag() }}
+
+    <div>
+        {{ form.image.label() }}
+        {{ form.image(placeholder="Add image") }}
+    </div>
+
+    <div>
+        {{ form.title.label() }}
+        {{ form.title(placeholder="Add title") }}
+    </div>
+
+    <div>
+        {{ form.author.label() }}
+        {{ form.author(placeholder="Add author") }}
+    </div>
+
+    <div>
+        {{ form.ISBN_10.label() }}
+        {{ form.ISBN_10(placeholder="Add ISBN-10") }}
+    </div>
+
+    <div>
+        {{ form.image.label() }}
+        {{ form.total_pages(placeholder="Add total pages") }}
+    </div>
+
+    {{ form.submit() }}
+</form>
+
+{% endblock %}
