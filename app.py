@@ -2,22 +2,24 @@ from flask import Flask, g
 from flask import render_template, flash, redirect, url_for
 import json
 
-# import models
+import models
+from forms import BookForm
 
 DEBUG = True
 PORT = 8000
 
 app = Flask(__name__)
+app.secret_key = 'supersecret'
 
-# @app.before_request
-# def before_request():
-#     g.db = models.DATABASE
-#     g.db.connect()
+@app.before_request
+def before_request():
+    g.db = models.DATABASE
+    g.db.connect()
 
-# @app.after_request
-# def after_request(response):
-#     g.db.close()
-#     return response
+@app.after_request
+def after_request(response):
+    g.db.close()
+    return response
 
 @app.route("/")
 def index():
@@ -32,15 +34,17 @@ def about():
 
 @app.route("/books")
 @app.route("/books/")
-@app.route("/books/<book_id>")
+@app.route("/books/<book_id>", methods=["GET", "POST"])
 def books(book_id = None):
     with open ('books.json') as json_data:
         books_data = json.load(json_data)
         if book_id == None:
             return render_template("books.html", books_template = books_data)
         else:
-            book_ID = int(book_id)
-            return render_template("book.html", book = books_data[book_ID])
+            form = BookForm()
+            return render_template("add_book.html", title = "Add Form", form = form )
+            # book_ID = int(book_id)
+            # return render_template("book.html", book = books_data[book_ID])
 
 @app.route("/mybooks")
 @app.route("/mybooks/")
@@ -70,5 +74,5 @@ def achievements():
     return render_template("achievements.html")
 
 if __name__ == '__main__':
-    # models.initialize()
+    models.initialize()
     app.run(debug=DEBUG, port=PORT)
