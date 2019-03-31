@@ -42,12 +42,10 @@ def books(book_id = None):
             book_ID = int(book_id)
             return render_template("book.html", book = books_data[book_ID])
 
-@app.route("/mybooks/<user_id>")
-def mybooks(user_id):
-    with open("users.json") as json_data:
-        users_data = json.load(json_data)
-        user_ID = int(user_id)
-        return render_template("mybooks.html", user = users_data[user_ID])
+@app.route("/mybooks")
+@app.route("/mybooks/")
+def mybooks():
+    return render_template("mybooks.html")
 
 @app.route("/mygoals")
 @app.route("/mygoals/")
