@@ -32,6 +32,12 @@ def mybooks(user_id):
         user_ID = int(user_id)
         return render_template("mybooks.html", user = users_data[user_ID])
 
+@app.route("/goals/<goal_id>")
+def goals(goal_id):
+    with open("goals.json") as json_data:
+        goals_data = json.load(json_data)
+        goal_ID = int(goal_id)
+        return render_template("mygoals.html", goal = goals_data[goal_ID])
 
 if __name__ == '__main__':
     app.run(debug=DEBUG, port=PORT)
