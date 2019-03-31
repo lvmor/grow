@@ -2,22 +2,22 @@ from flask import Flask, g
 from flask import render_template, flash, redirect, url_for
 import json
 
-import models
+# import models
 
 DEBUG = True
 PORT = 8000
 
 app = Flask(__name__)
 
-@app.before_request
-def before_request():
-    g.db = models.DATABASE
-    g.db.connect()
+# @app.before_request
+# def before_request():
+#     g.db = models.DATABASE
+#     g.db.connect()
 
-@app.after_request
-def after_request(response):
-    g.db.close()
-    return response
+# @app.after_request
+# def after_request(response):
+#     g.db.close()
+#     return response
 
 @app.route("/")
 def index():
@@ -49,13 +49,18 @@ def mybooks(user_id):
         user_ID = int(user_id)
         return render_template("mybooks.html", user = users_data[user_ID])
 
-@app.route("/goals/<goal_id>")
-def goals(goal_id):
+@app.route("/mygoals")
+@app.route("/mygoals/")
+@app.route("/mygoals/<goal_id>")
+def mygoals(goal_id = None):
     with open("goals.json") as json_data:
         goals_data = json.load(json_data)
-        goal_ID = int(goal_id)
-        return render_template("mygoals.html", goal = goals_data[goal_ID])
+        if goal_id == None:
+            return render_template("mygoals.html", goals_template = goals_data)
+        else:
+            goal_ID = int(goal_id)
+            return render_template("mygoal.html", goal = goals_data[goal_ID])
 
 if __name__ == '__main__':
-    models.initialize()
+    # models.initialize()
     app.run(debug=DEBUG, port=PORT)
