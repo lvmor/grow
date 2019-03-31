@@ -59,6 +59,11 @@ def mygoals(goal_id = None):
             goal_ID = int(goal_id)
             return render_template("mygoal.html", goal = goals_data[goal_ID])
 
+@app.route("/stats")
+@app.route("/stats/")
+def stats():
+    return render_template("stats.html")
+
 @app.route("/achievements")
 @app.route("/achievements/")
 def achievements():
