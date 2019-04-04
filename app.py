@@ -21,11 +21,26 @@ def after_request(response):
     g.db.close()
     return response
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    with open("books.json") as json_data:
-        books_data = json.load(json_data)
-        return render_template("books.html", books_template = books_data)
+    form = BookForm()
+    if form.validate_on_submit():
+        models.Book.create(
+        image = form.image.data.strip(),
+        title = form.title.data.strip(),
+        author = form.author.data.strip(),
+        ISBN_10 = form.ISBN_10.data.strip(),
+        current_page = form.current_page.data,
+        total_pages = form.total_pages.data)
+        print("redirect reached")
+        flash("Added new book, titled: {}".format(form.title.data))
+        return redirect("/mybooks")
+            
+    print("not working")
+    return render_template("add_book.html", title = "Add Form", form = form )
+    # with open("books.json") as json_data:
+    #     books_data = json.load(json_data)
+    #     return render_template("books.html", books_template = books_data)
 
 @app.route("/about")
 @app.route("/about/")
@@ -36,19 +51,26 @@ def about():
 @app.route("/books/")
 @app.route("/books/<book_id>", methods=["GET", "POST"])
 def books(book_id = None):
-    with open ('books.json') as json_data:
-        books_data = json.load(json_data)
-        if book_id == None:
-            return render_template("books.html", books_template = books_data)
-        else:
-            form = BookForm()
-            return render_template("add_book.html", title = "Add Form", form = form )
-            # book_ID = int(book_id)
-            # return render_template("book.html", book = books_data[book_ID])
+    if book_id == None:
+        books_data = models.Book.select().limit(24)
+        return render_template("books.html", books_template = books_data)
+    else:
+        book_ID = int(book_id)
+        book = models.Book.get(models.Book.id == book_ID )
+        return render_template("book.html", book = books_data[book_ID])
+
+    # with open ('books.json') as json_data:
+    #     books_data = json.load(json_data)
+    #     if book_id == None:
+    #         return render_template("books.html", books_template = books_data)
+    #     else:
+    #         book_ID = int(book_id)
+    #         return render_template("book.html", book = books_data[book_ID])
 
 @app.route("/mybooks")
 @app.route("/mybooks/")
 def mybooks():
+    books = models.Book.select().limit()
     return render_template("mybooks.html")
 
 @app.route("/mygoals")
