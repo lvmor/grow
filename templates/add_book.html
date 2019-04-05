@@ -1,36 +1,42 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-<form method="POST" action="" nonvalidate>
+<h1>Add Book</h1>
+<form method="POST" action="" novalidate>
     {{ form.hidden_tag() }}
 
     <div>
-        {{ form.image.label() }}
-        {{ form.image(placeholder="Add image") }}
+        {{ form.title.label }}
+        {{ form.title(class_="input", placeholder="Add title") }}
     </div>
 
     <div>
-        {{ form.title.label() }}
-        {{ form.title(placeholder="Add title") }}
+        {{ form.image.label }}
+        {{ form.image(class_="input", placeholder="Add image") }}
+    </div>
+
+
+    <div>
+        {{ form.author.label }}
+        {{ form.author(class_="input", placeholder="Add author") }}
     </div>
 
     <div>
-        {{ form.author.label() }}
-        {{ form.author(placeholder="Add author") }}
+        {{ form.ISBN_10.label }}
+        {{ form.ISBN_10(class_="input", placeholder="Add ISBN-10") }}
     </div>
 
     <div>
-        {{ form.ISBN_10.label() }}
-        {{ form.ISBN_10(placeholder="Add ISBN-10") }}
+        {{ form.current_page.label }}
+        {{ form.current_page(class_="input", placeholder="Add current page") }}
     </div>
 
     <div>
-        {{ form.total_pages.label() }}
-        {{ form.total_pages(placeholder="Add total pages") }}
+        {{ form.total_pages.label }}
+        {{ form.total_pages(class_="input", placeholder="Add total pages") }}
     </div>
 
-    {{ form.submit() }}
+    {{ form.submit(class_="button") }}
 </form>
 
 {% endblock %}
