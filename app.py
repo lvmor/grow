@@ -1,8 +1,12 @@
 from flask import Flask, g
 from flask import render_template, flash, redirect, url_for
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user 
+from flask_bcrypt import check_password_hash
 import json
 
+
 import models
+import forms
 from forms import BookForm
 
 DEBUG = True
@@ -10,6 +14,17 @@ PORT = 8000
 
 app = Flask(__name__)
 app.secret_key = 'supersecret'
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.user_loader
+def load_user(userid):
+    try:
+        return models.User.get(models.User.id == userid)
+    except models.DoesNotExist:
+        return None
 
 @app.before_request
 def before_request():
@@ -20,6 +35,49 @@ def before_request():
 def after_request(response):
     g.db.close()
     return response
+
+@app.route("/register", methods=("GET", "POST"))
+def register():
+    form = forms.RegisterForm()
+    if form.validate_on_submit():
+        flash("You are now registered!", "success")
+        models.User.create_user(
+            name = "N/A",
+            username = form.username.data,
+            email = form.email.data,
+            password = form.password.data,            
+            avatar = "N/A",
+            genre = "N/A")
+        print("username: " + form.username.data)
+        print("Email: " + form.email.data)
+        print("Password: " + form.password.data)
+
+
+        return redirect(url_for("index"))
+    return render_template("register.html", form=form)
+
+@app.route("/login", methods=("GET", "POST"))
+def login():
+    form = forms.LoginForm()
+    if form.validate_on_submit():
+        try:
+            user = models.User.get(models.User.email == form.email.data)
+        except models.DoesNotExist:
+            flash("your emails or password does not match", "error")
+        else:
+            if check_password_hash(user.password, form.password.data):
+                login_user(user)
+                flash("You've been logged in", "success")
+            else:
+                flash("your email or password does not match" "error")
+    return render_template("login.html", form=form)
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash("You've been logged out", "success")
+    return redirect(url_for("index"))
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -35,6 +93,8 @@ def index():
         print("redirect reached")
         flash("Added new book, titled: {}".format(form.title.data))
         return redirect("/mybooks")
+    else:
+        print("Not valid!")
             
     print("not working")
     return render_template("add_book.html", title = "Add Form", form = form )
@@ -97,4 +157,16 @@ def achievements():
 
 if __name__ == '__main__':
     models.initialize()
+    # try:
+    #     models.User.create_user(
+    #         name = "Mr. User",
+    #         username = "mr.username",
+    #         email = "user@io.com",
+    #         password = "dog",
+    #         avatar = "user.png",
+    #         genre = "Self-development"
+    #         )
+    # except ValueError:
+    #     pass
+
     app.run(debug=DEBUG, port=PORT)
