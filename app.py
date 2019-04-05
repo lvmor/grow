@@ -68,6 +68,7 @@ def login():
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
                 flash("You've been logged in", "success")
+                return redirect(url_for("index"))
             else:
                 flash("your email or password does not match" "error")
     return render_template("login.html", form=form)
@@ -117,7 +118,7 @@ def books(book_id = None):
     else:
         book_ID = int(book_id)
         book = models.Book.get(models.Book.id == book_ID )
-        return render_template("book.html", book = books_data[book_ID])
+        return render_template("book.html", book = book)
 
     # with open ('books.json') as json_data:
     #     books_data = json.load(json_data)
