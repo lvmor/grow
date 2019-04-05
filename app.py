@@ -7,7 +7,7 @@ import json
 
 import models
 import forms
-from forms import BookForm
+from forms import BookForm, GoalForm
 
 DEBUG = True
 PORT = 8000
@@ -133,6 +133,12 @@ def books(book_id = None):
 def mybooks():
     books = models.Book.select().limit()
     return render_template("mybooks.html")
+
+@app.route("/setgoal", methods=["GET", "POST"])
+@app.route("/setgoal/", methods=["GET", "POST"])
+def setgoal():
+    form = GoalForm()
+    return render_template("set_goal.html", title="New Goal", form=form)
 
 @app.route("/mygoals")
 @app.route("/mygoals/")
