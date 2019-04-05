@@ -3,7 +3,7 @@ from wtforms import TextField, IntegerField, SubmitField
 
 from models import Book, User, Goal
 
-from wtforms import StringField, PasswordField, TextAreaField
+from wtforms import StringField, PasswordField, TextAreaField, HiddenField
 from wtforms.validators import (DataRequired, Regexp, ValidationError, Email,
                                Length, EqualTo)
 
@@ -60,4 +60,14 @@ class LoginForm(Form):
     password = PasswordField("Password", validators = [DataRequired()])
 
 
-
+class GoalForm(Form):
+    id = HiddenField()
+    # user_id = ForeignKeyField(model=User, backref="users")
+    # book_id = ForeignKeyField(model=Book, backref="books")
+    start_date = TextField("Start date: ")
+    end_date = TextField("End date: ")
+    book_progress = TextField("Book Progress: ")
+    status = TextField("Status: ")
+    total_books_read = IntegerField("Books Read: ")
+    notes = TextField("Notes: ")
+    submit = SubmitField("Save/Update Goal")
