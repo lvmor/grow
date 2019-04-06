@@ -5,14 +5,15 @@
 <h1>Book Details</h1>
 
 <article>
-    <div>
-        <h2>{{ book.image }}</h2>
-        <h2>Title: {{ book.title }}</h2>
-        <h2>Author: {{ book.author }}</h2>
-        <h2>ISBN_10: {{ book.ISBN_10 }}</h2>
-        <h2>current_page: {{ book.current_page }}</h2>
-        <h2>Total Pages: {{ book.total_pages }}</h2>
-        <button>Add Book</button>
+    <div class="row">
+        <div class="col-md-4"><img src="{{ book.image }}" /></div>
+        <div class="col-md-6">
+            <h2>Title: {{ book.title }}</h2>
+            <h2>Author: {{ book.author }}</h2>
+            <h2>ISBN_10: {{ book.ISBN_10 }}</h2>
+            <h2>Total Pages: {{ book.total_pages }}</h2>
+            <button><a href="/setgoal/{{book.id}}">Add Book</a></button>
+        </div>
     </div>
 
 </article>
