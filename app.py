@@ -85,13 +85,54 @@ def index():
         title = form.title.data.strip(),
         author = form.author.data.strip(),
         ISBN_10 = form.ISBN_10.data.strip(),
-        current_page = form.current_page.data,
         total_pages = form.total_pages.data)
         flash("Added new book, titled: {}".format(form.title.data))
         return redirect("/setgoal")
         # return redirect('/books/{}'.format(book_id))
             
-    return render_template("add_book.html", title = "Add Form", form = form )
+    return render_template("add_book.html", title = "Add Form", form = form)
+
+    # form = BookForm()
+    # bookid = request.form.get("bookid", "")
+    # command = request.form.get("submit", "")
+
+    # if command == "Delete":
+    #     models.Book.delete_by_id(bookid)
+    #     return redirect("/mybooks")
+    # elif command == "Edit":
+    #     bookid = int(bookid)
+    #     book = models.Book.get(models.Book.id == bookid)
+    #     form.id.data = book.id
+    #     form.title.data = goal.title
+    #     form.image.data = goal.image
+    #     form.author.data = goal.author
+    #     form.ISBN_10.data = goal.ISBN_10
+    #     form.total_pages.data = goal.total_pages
+    #     return render_template("/mybooks.html", book=book, goal=goal, form=form)
+
+    # if form.validate_on_submit():
+    #     if form.id. data == "":
+    #         models.Book.create(
+    #             # user_id = current_user.id,
+    #             title = form.title.data.strip(),
+    #             image = form.image.data.strip(),
+    #             author = form.author.data.strip(),
+    #             ISBN_10 = form.ISBN_10.data.strip(),
+    #             total_pages = form.total_pages.data)
+            
+    #         return redirect ("/mybooks")
+    #     else:
+    #         book = models.Book.get(models.Book.id == form.id.data)
+    #         book.title = form.title.data.strip()
+    #         book.image = form.image.data.strip()
+    #         book.author = form.author.data.strip()
+    #         book.ISBN_10 = form.ISBN_10.data.strip()
+    #         book.total_pages = form.total_pages.data
+    #         book.save()
+    #         flash("Added new book!")
+    #         return redirect("/mybooks")
+
+    # return render_template("/mybooks.html", book=book, goal=goal, form=form)
 
 @app.route("/about")
 @app.route("/about/")
@@ -118,41 +159,90 @@ def mybooks():
 
 @app.route("/setgoal", methods=["GET", "POST"])
 @app.route("/setgoal/", methods=["GET", "POST"])
-def setgoal():
+@app.route("/setgoal/<book_id>", methods=["GET", "POST"])
+def setgoal(book_id = None):
     form = GoalForm()
     if form.validate_on_submit():
         models.Goal.create(
-        # user_id = current_user.id,
-        # book_id = book_id,
-        start_date = form.start_date.data.strip(),
-        end_date = form.end_date.data.strip(),
-        book_progress = form.book_progress.data.strip(),
-        status = form.status.data.strip(),
-        total_books_read = form.total_books_read.data,
+        user_id = current_user.id,
+        book_id = book_id,
+        start_date = form.start_date.data,
+        end_date = form.end_date.data,
+        book_progress = 0,
+        status = "in-progress",
         notes = form.notes.data.strip())
         flash("Added new goal!")
         return redirect ("/mybooks")
 
     return render_template("set_goal.html", title="New Goal", form=form)
 
+
+    # form = GoalForm()
+    # goalid = request.form.get("goalid", "")
+    # command = request.form.get("submit", "")
+
+    # if command == "Delete":
+    #     models.Goal.delete_by_id(goalid)
+    #     return redirect("/mygoals")
+    # elif command == "Edit":
+    #     goalid = int(goalid)
+    #     goal = models.Goal.get(models.Goal.id == goalid)
+    #     form.id.data = goal.id
+    #     form.start_date.data = goal.start_date
+    #     form.end_date.data = goal.end_date
+    #     form.book_progress.data = goal.book_progress
+    #     form.status.data = goal.status
+    #     form.total_books_read.data = goal.total_books_read
+    #     form.notes.data = goal.notes
+    #     return render_template("/mygoal.html", book=book, goals=goals, form=form)
+
+    # if form.validate_on_submit():
+    #     if form.id. data == "":
+    #         models.Goal.create(
+    #             # user_id = current_user.id,
+    #             # book_id = book_id,
+    #             # book = book,
+    #             start_date = form.start_date.data.strip(),
+    #             end_date = form.end_date.data.strip(),
+    #             book_progress = form.book_progress.data.strip(),
+    #             status = form.status.data.strip(),
+    #             total_books_read = form.total_books_read.data,
+    #             notes = form.notes.data.strip())
+            
+    #         return redirect ("/mybooks")
+    #     else:
+    #         goal = models.Goal.get(models.Goal.id == form.id.data)
+    #         goal.start_date = form.start_date.data.strip()
+    #         goal.end_date = form.end_date.data.strip()
+    #         goal.book_progress = form.book_progress.data.strip()
+    #         goal.status = form.status.data.strip()
+    #         goal.total_books_read = form.total_books_read.data
+    #         goal.notes = form.notes.data.strip()
+    #         goal.save()
+    #         flash("Added new goal!")
+    #         return redirect("/mygoals/{}".format(goal_id))
+
+    # return render_template("/mygoal.html", book=book, goal=goal, form=form)
+
 @app.route("/mygoals")
 @app.route("/mygoals/")
 @app.route("/mygoals/<goal_id>")
 def mygoals(goal_id = None):
-    # if goal_id == None:
-    #     goals_data = models.Goal.select().limit(10)
-    #     return render_template("mygoals.html", goals_template = goals_data)
-    # else:
-    #     goal_ID = int(goal_id)
-    #     goal = models.Goal.get(models.Goal.id == goal_ID)
-    #     return render_template("mygoal.html", goal = goal)
-    with open("goals.json") as json_data:
-        goals_data = json.load(json_data)
-        if goal_id == None:
-            return render_template("mygoals.html", goals_template = goals_data)
-        else:
-            goal_ID = int(goal_id)
-            return render_template("mygoal.html", goal = goals_data[goal_ID])
+    if goal_id == None:
+        goals_data = models.Goal.select().limit(10)
+        return render_template("mygoals.html", goals_template = goals_data)
+    else:
+        goal_ID = int(goal_id)
+        goal = models.Goal.get(models.Goal.id == goal_ID)
+        progress = int((goal.book_progress / goal.book_id.total_pages) * 100)
+        return render_template("mygoal.html", goal = goal, progress = progress)
+    # with open("goals.json") as json_data:
+    #     goals_data = json.load(json_data)
+    #     if goal_id == None:
+    #         return render_template("mygoals.html", goals_template = goals_data)
+    #     else:
+    #         goal_ID = int(goal_id)
+    #         return render_template("mygoal.html", goal = goals_data[goal_ID])
 
 @app.route("/stats")
 @app.route("/stats/")
