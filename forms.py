@@ -1,20 +1,13 @@
 from flask_wtf import FlaskForm as Form
 from wtforms import TextField, IntegerField, SubmitField
 
-from models import Book, User, Goal
-
 from wtforms import StringField, PasswordField, TextAreaField, HiddenField
+from wtforms.fields.html5 import DateField
+
 from wtforms.validators import (DataRequired, Regexp, ValidationError, Email,
                                Length, EqualTo)
+from models import User, Book, Goal
 
-class BookForm(Form):
-    title = TextField("Title: ")
-    image = TextField("Image: ")
-    author = TextField("Author: ")
-    ISBN_10 = TextField("ISBN: ")
-    current_page = IntegerField("Current page: ")
-    total_pages = IntegerField("Total pages")
-    submit = SubmitField("Add Book")
 
 def name_exists(form, field):
     if User.select().where(User.username == field.data).exists():
@@ -54,20 +47,23 @@ class RegisterForm(Form):
         "Confirm Password",
         validators = [DataRequired()]
     )
-
 class LoginForm(Form):
     email = StringField("Email", validators = [DataRequired(), Email()])
     password = PasswordField("Password", validators = [DataRequired()])
 
+class BookForm(Form):
+    title = TextField("Title: ")
+    image = TextField("Image: ")
+    author = TextField("Author: ")
+    ISBN_10 = TextField("ISBN: ")
+    total_pages = IntegerField("Total pages")
+    submit = SubmitField("Add Book")
 
 class GoalForm(Form):
     id = HiddenField()
-    # user_id = ForeignKeyField(model=User, backref="users")
-    # book_id = ForeignKeyField(model=Book, backref="books")
-    start_date = TextField("Start date: ")
-    end_date = TextField("End date: ")
-    book_progress = TextField("Book Progress: ")
+    start_date = DateField("Start date: ")
+    end_date = DateField("End date: ")
+    book_progress = IntegerField("Book Progress: ")
     status = TextField("Status: ")
-    total_books_read = IntegerField("Books Read: ")
-    notes = TextField("Notes: ")
+    notes = TextAreaField("Notes: ")
     submit = SubmitField("Save/Update Goal")

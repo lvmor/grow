@@ -6,17 +6,6 @@ from flask_bcrypt import generate_password_hash
 
 DATABASE = SqliteDatabase("grow.db")
 
-class Book(Model):
-    title = TextField()
-    image = TextField()
-    author = TextField()
-    ISBN_10 = TextField()
-    current_page = IntegerField()
-    total_pages = IntegerField()
-
-    class Meta:
-        database = DATABASE
-
 class User(UserMixin, Model):
     name = CharField()
     username = CharField(unique = True)
@@ -43,15 +32,23 @@ class User(UserMixin, Model):
             
         # except IntegrityError:
         #     raise ValueError("User/Email already exists")
+class Book(Model):
+    title = TextField()
+    image = TextField()
+    author = TextField()
+    ISBN_10 = TextField()
+    total_pages = IntegerField()
+
+    class Meta:
+        database = DATABASE
 
 class Goal(Model):
-    user_id = ForeignKeyField(model=User, backref="users")
-    book_id = ForeignKeyField(model=Book, backref="books")
+    user_id = ForeignKeyField(model=User, backref="user")
+    book_id = ForeignKeyField(model=Book, backref="book")
     start_date = TextField()
     end_date = TextField()
-    book_progress = TextField()
+    book_progress = IntegerField()
     status = TextField()
-    total_books_read = IntegerField()
     notes = TextField()
 
     class Meta:
