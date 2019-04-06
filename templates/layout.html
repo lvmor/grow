@@ -29,7 +29,6 @@
                     <li><a href="/mygoals">My Goals</a></li>
                     <li><a href="/stats">Stats</a></li>
                     <li><a href="/achievements">Achievements</a></li>
-
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -38,7 +37,7 @@
                     <li><a href="{{url_for('logout')}}" title="logout">Logout</a></li>
                     {% else %}
                     <li><a href="{{url_for('login')}}" title="login">Login</a></li>
-                    <li><a href="{{url_for('register')}}" title="register">register</a></li>
+                    <li><a href="{{url_for('register')}}" title="register">Sign Up</a></li>
                     {% endif %}
                 </ul>
             </div>
