@@ -107,7 +107,7 @@ def books(book_id = None):
         return render_template("books.html", books_template = books_data)
     else:
         book_ID = int(book_id)
-        book = models.Book.get(models.Book.id == book_ID )
+        book = models.Book.get(models.Book.id == book_ID)
         return render_template("book.html", book = book)
 
 @app.route("/mybooks")
@@ -122,22 +122,30 @@ def setgoal():
     form = GoalForm()
     if form.validate_on_submit():
         models.Goal.create(
-            # user_id = current_user.id,
-            # book_id = book_id,
-            start_date = form.start_date.data.strip(),
-            end_date = form.end_date.data.strip(),
-            book_progress = form.book_progress.data.strip(),
-            status = form.status.data.strip(),
-            total_books_read = form.total_books_read.data,
-            notes = form.notes.data.strip()
-        )
+        # user_id = current_user.id,
+        # book_id = book_id,
+        start_date = form.start_date.data.strip(),
+        end_date = form.end_date.data.strip(),
+        book_progress = form.book_progress.data.strip(),
+        status = form.status.data.strip(),
+        total_books_read = form.total_books_read.data,
+        notes = form.notes.data.strip())
+        flash("Added new goal!")
         return redirect ("/mybooks")
+
     return render_template("set_goal.html", title="New Goal", form=form)
 
 @app.route("/mygoals")
 @app.route("/mygoals/")
 @app.route("/mygoals/<goal_id>")
 def mygoals(goal_id = None):
+    # if goal_id == None:
+    #     goals_data = models.Goal.select().limit(10)
+    #     return render_template("mygoals.html", goals_template = goals_data)
+    # else:
+    #     goal_ID = int(goal_id)
+    #     goal = models.Goal.get(models.Goal.id == goal_ID)
+    #     return render_template("mygoal.html", goal = goal)
     with open("goals.json") as json_data:
         goals_data = json.load(json_data)
         if goal_id == None:
