@@ -5,11 +5,15 @@
 <h1>My Goal</h1>
 
 <section>
-    <h2> Title: {{ goal.book_id }} </h2>
+    <h2> Title: {{ goal.book_id.title }} </h2>
     <h2> Status: {{ goal.status }} </h2>
-    <h2> Book Progress: {{ goal.book_progress }} </h2>
+    <h2> Book Progress: {{ goal.book_progress }} / {{ goal.book_id.total_pages}} pages</h2>
     <h2> Start date: {{ goal.start_date }} </h2>
     <h2> End date: {{ goal.end_date }} </h2>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{progress}}%" aria-valuenow="{{progress}}"
+            aria-valuemin="0" aria-valuemax="100">{{progress}}%</div>
+    </div>
 </section>
 
 {% endblock %}
