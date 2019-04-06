@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1>Set Book Goal</h1>
+<h2>Please enter the # of pages you plan to read: </h2>
 <form method="POST" action="" novalidate>
     {{ form.hidden_tag() }}
 
@@ -15,28 +16,10 @@
         {{ form.end_date(class_="input", placeholder="Add end date") }}
     </div>
 
-
-    <div>
-        {{ form.book_progress.label }}
-        {{ form.book_progress(class_="input", placeholder="Add book progress") }}
-    </div>
-
-    <div>
-        {{ form.status.label }}
-        {{ form.status(class_="input", placeholder="Add status") }}
-    </div>
-
-    <div>
-        {{ form.total_books_read.label }}
-        {{ form.total_books_read(class_="input", placeholder="Add total books read") }}
-    </div>
-
     <div>
         {{ form.notes.label }}
-        {{ form.notes(class_="input", placeholder="Add notes") }}
+        {{ form.notes(class_="textarea", placeholder="Add notes") }}
     </div>
-
     {{ form.submit(class_="button") }}
 </form>
-
 {% endblock %}
