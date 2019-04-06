@@ -92,9 +92,6 @@ def index():
         # return redirect('/books/{}'.format(book_id))
             
     return render_template("add_book.html", title = "Add Form", form = form )
-    # with open("books.json") as json_data:
-    #     books_data = json.load(json_data)
-    #     return render_template("books.html", books_template = books_data)
 
 @app.route("/about")
 @app.route("/about/")
@@ -112,14 +109,6 @@ def books(book_id = None):
         book_ID = int(book_id)
         book = models.Book.get(models.Book.id == book_ID )
         return render_template("book.html", book = book)
-
-    # with open ('books.json') as json_data:
-    #     books_data = json.load(json_data)
-    #     if book_id == None:
-    #         return render_template("books.html", books_template = books_data)
-    #     else:
-    #         book_ID = int(book_id)
-    #         return render_template("book.html", book = books_data[book_ID])
 
 @app.route("/mybooks")
 @app.route("/mybooks/")
