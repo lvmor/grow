@@ -48,10 +48,6 @@ def register():
             password = form.password.data,            
             avatar = "N/A",
             genre = "N/A")
-        print("username: " + form.username.data)
-        print("Email: " + form.email.data)
-        print("Password: " + form.password.data)
-
 
         return redirect(url_for("index"))
     return render_template("register.html", form=form)
@@ -91,13 +87,10 @@ def index():
         ISBN_10 = form.ISBN_10.data.strip(),
         current_page = form.current_page.data,
         total_pages = form.total_pages.data)
-        print("redirect reached")
         flash("Added new book, titled: {}".format(form.title.data))
-        return redirect("/mybooks")
-    else:
-        print("Not valid!")
+        return redirect("/setgoal")
+        # return redirect('/books/{}'.format(book_id))
             
-    print("not working")
     return render_template("add_book.html", title = "Add Form", form = form )
     # with open("books.json") as json_data:
     #     books_data = json.load(json_data)
@@ -138,6 +131,18 @@ def mybooks():
 @app.route("/setgoal/", methods=["GET", "POST"])
 def setgoal():
     form = GoalForm()
+    if form.validate_on_submit():
+        models.Goal.create(
+            # user_id = current_user.id,
+            # book_id = book_id,
+            start_date = form.start_date.data.strip(),
+            end_date = form.end_date.data.strip(),
+            book_progress = form.book_progress.data.strip(),
+            status = form.status.data.strip(),
+            total_books_read = form.total_books_read.data,
+            notes = form.notes.data.strip()
+        )
+        return redirect ("/mybooks")
     return render_template("set_goal.html", title="New Goal", form=form)
 
 @app.route("/mygoals")
