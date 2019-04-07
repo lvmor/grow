@@ -169,7 +169,7 @@ def setgoal(book_id = None):
         start_date = form.start_date.data,
         end_date = form.end_date.data,
         book_progress = 0,
-        status = "in-progress",
+        status = "In-progress",
         notes = form.notes.data.strip())
         flash("Added new goal!")
         return redirect ("/mybooks")

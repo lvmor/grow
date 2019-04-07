@@ -5,14 +5,24 @@
 <h1>My Goal</h1>
 
 <section>
-    <h2> Title: {{ goal.book_id.title }} </h2>
-    <h2> Status: {{ goal.status }} </h2>
-    <h2> Book Progress: {{ goal.book_progress }} / {{ goal.book_id.total_pages}} pages</h2>
-    <h2> Start date: {{ goal.start_date }} </h2>
-    <h2> End date: {{ goal.end_date }} </h2>
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: {{progress}}%" aria-valuenow="{{progress}}"
-            aria-valuemin="0" aria-valuemax="100">{{progress}}%</div>
+    <div class="row form-group"">
+        <div class=" col-md-4 form-group">
+        <img src="{{goal.book_id.image}}" style=" width: 100%" />
+    </div>
+    <div class="col-md-8">
+        <h2> Title: {{ goal.book_id.title }} </h2>
+        <h2> Status: {{ goal.status }} </h2>
+        <h2> Book Progress: {{ goal.book_progress }} / {{ goal.book_id.total_pages}} pages</h2>
+        <h2> Start date: {{ goal.start_date }} </h2>
+        <h2> End date: {{ goal.end_date }} </h2>
+    </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-10 progress" style="height: 2em">
+            <div class="progress-bar bg-success" role="progressbar" style="width: {{progress}}%"
+                aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100">
+                {{progress}}%</div>
+        </div>
     </div>
 </section>
 

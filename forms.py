@@ -66,4 +66,4 @@ class GoalForm(Form):
     book_progress = IntegerField("Book Progress: ")
     status = TextField("Status: ")
     notes = TextAreaField("Notes: ")
-    submit = SubmitField("Save/Update Goal")
+    submit = SubmitField("Save Goal")
