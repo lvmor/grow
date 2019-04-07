@@ -4,18 +4,23 @@
 <h1>My Goals</h1>
 
 {% for goal in goals_template %}
-<article class="row form-group">
-    <div class="col-md-4">
-        <img src="{{ goal.book_id.image }}" style="width: 60%" />
+<article>
+    <div class="row form-group">
+        <div class="col-md-4">
+            <img src="{{ goal.book_id.image }}" style="width: 70%" />
+        </div>
+        <div class="col-md-3">
+            <h3> {{ goal.book_id.title }} </h3>
+            <h4> By: {{ goal.book_id.author }} </h4>
+        </div>
+        <div class="col-md-3">
+            <h3>{{ goal.status }}</h3>
+        </div>
+        <div class="col-md-1">
+            <a class="mygoals-btns btn btn-success btn-lg" href="/mygoals/{{goal.id}}">Details</a>
+            <button class="mygoals-btns btn btn-danger btn-lg">Delete</button>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h3> {{ goal.book_id.title }} </h3>
-        <h4> By: {{ goal.book_id.author }} </h4>
-    </div>
-    <div class="col-md-3">
-        <h3>{{ goal.status }}</h3>
-    </div>
-    <button class="btn btn-success"><a href="/mygoals/{{goal.id}}">Details</a></button>
 </article>
 
 {% endfor %}
