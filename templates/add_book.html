@@ -5,33 +5,33 @@
 <form method="POST" action="" novalidate>
     {{ form.hidden_tag() }}
 
-    <div>
+    <div class="form-group">
         {{ form.title.label }}
-        {{ form.title(class_="input", placeholder="Add title") }}
+        {{ form.title(class_="input form-control", placeholder="Add title") }}
     </div>
 
-    <div>
+    <div class="form-group">
         {{ form.image.label }}
-        {{ form.image(class_="input", placeholder="Add image") }}
+        {{ form.image(class_="input form-control", placeholder="Add image") }}
     </div>
 
 
-    <div>
+    <div class="form-group">
         {{ form.author.label }}
-        {{ form.author(class_="input", placeholder="Add author") }}
+        {{ form.author(class_="input form-control", placeholder="Add author") }}
     </div>
 
-    <div>
+    <div class="form-group">
         {{ form.ISBN_10.label }}
-        {{ form.ISBN_10(class_="input", placeholder="Add ISBN-10") }}
+        {{ form.ISBN_10(class_="input form-control", placeholder="Add ISBN-10") }}
     </div>
 
-    <div>
+    <div class="form-group">
         {{ form.total_pages.label }}
-        {{ form.total_pages(class_="input", placeholder="Add total pages") }}
+        {{ form.total_pages(class_="input form-control", placeholder="Add total pages") }}
     </div>
 
-    {{ form.submit(class_="button") }}
+    {{ form.submit(class_="button btn btn-success") }}
 </form>
 
 {% endblock %}

@@ -6,20 +6,20 @@
 <form method="POST" action="" novalidate>
     {{ form.hidden_tag() }}
 
-    <div>
+    <div class="form-group">
         {{ form.start_date.label }}
-        {{ form.start_date(class_="input", placeholder="Add start date") }}
+        {{ form.start_date(class_="input form-control", placeholder="Add start date") }}
     </div>
 
-    <div>
+    <div class="form-group">
         {{ form.end_date.label }}
-        {{ form.end_date(class_="input", placeholder="Add end date") }}
+        {{ form.end_date(class_="input form-control", placeholder="Add end date") }}
     </div>
 
-    <div>
+    <div class="form-group">
         {{ form.notes.label }}
-        {{ form.notes(class_="textarea", placeholder="Add notes") }}
+        {{ form.notes(class_="textarea form-control", placeholder="Add notes") }}
     </div>
-    {{ form.submit(class_="button") }}
+    {{ form.submit(class_="button btn btn-success") }}
 </form>
 {% endblock %}
