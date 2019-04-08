@@ -2,6 +2,12 @@
 
 {% block content %}
 <h1>Books Template</h1>
+<div>
+    <form action="" method="GET">
+        <input name="search" placeholder="Search for book here" />
+        <button class="btn btn-success btn-md">Find</button>
+    </form>
+</div>
 {% for book in books_template %}
 <article>
     <div class="col-md-4">
