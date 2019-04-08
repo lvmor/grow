@@ -15,6 +15,12 @@
         <h2> Book Progress: {{ goal.book_progress }} / {{ goal.book_id.total_pages}} pages</h2>
         <h2> Start date: {{ goal.start_date }} </h2>
         <h2> End date: {{ goal.end_date }} </h2>
+
+        <form action="" method="POST">
+            <input name="goalid" type="hidden" value="{{goal.id}}">
+            <input type="text" name="pages" value="{{goal.book_progress}}" />
+            <input type="submit" value="Save" />
+        </form>
     </div>
     </div>
     <div class="row form-group">
@@ -24,6 +30,7 @@
                 {{progress}}%</div>
         </div>
     </div>
+
 </section>
 
 {% endblock %}
