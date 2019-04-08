@@ -18,7 +18,8 @@
         </div>
         <div class="col-md-1">
             <a class="mygoals-btns btn btn-success btn-lg" href="/mygoals/{{goal.id}}">Details</a>
-            <button class="mygoals-btns btn btn-danger btn-lg">Delete</button>
+            <a class="mygoals-btns btn btn-danger btn-lg" href="/delete/{{goal.id}}"
+                onclick="return confirm('Are you sure you want to delete this book goal? Action cannot be undone.') ">Delete</a>
         </div>
     </div>
 </article>
