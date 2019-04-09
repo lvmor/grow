@@ -10,7 +10,10 @@
         <div class="col-md-6">
             <h2>Title: {{ book.title }}</h2>
             <h2>Author: {{ book.author }}</h2>
+            <h2>ISBN_13: {{ book.ISBN_13 }}</h2>
             <h2>ISBN_10: {{ book.ISBN_10 }}</h2>
+            <h2>Date published : {{ book.date_published }}</h2>
+            <h2>Description: {{ book.description }}</h2>
             <h2>Total Pages: {{ book.total_pages }}</h2>
             <a class="btn btn-success btn-md" href="/setgoal/{{book.id}}">Set My Goal!</a>
         </div>
