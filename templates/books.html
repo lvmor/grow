@@ -1,23 +1,22 @@
 {% extends "layout.html"%}
 
 {% block content %}
-<h1>Books Template</h1>
-<div>
+<div class="col text-center">
     <form action="" method="GET">
-        <input name="search" placeholder="Search for book here" />
+        <input id="search" name="search" placeholder="Search for book here" />
         <button class="btn btn-success btn-md">Find</button>
     </form>
 </div>
 {% for book in books_template %}
 <article>
-    <div class="col-md-4">
+    <div class="col-md-4" id="results">
 
         <div class="form-group">
 
             <div class="col text-center">
                 <h3>{{ book.title }}</h3>
             </div>
-            <div class="form-group">
+            <div class="col text-center form-group">
                 <a href="{{url_for("books", book=book.id)}}"><img src="{{book.image}}" /></a>
             </div>
             <div class="col text-center">
