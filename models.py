@@ -36,7 +36,10 @@ class Book(Model):
     title = TextField()
     image = TextField()
     author = TextField()
+    ISBN_13 = TextField()
     ISBN_10 = TextField()
+    date_published = TextField()
+    description = TextField()
     total_pages = IntegerField()
 
     class Meta:
