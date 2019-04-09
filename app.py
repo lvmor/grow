@@ -91,7 +91,10 @@ def index():
         image = form.image.data.strip(),
         title = form.title.data.strip(),
         author = form.author.data.strip(),
+        ISBN_13 = form.ISBN_13.data.strip(),
         ISBN_10 = form.ISBN_10.data.strip(),
+        date_published = form.date_published.data.strip(),
+        description = form.description.data.strip(),
         total_pages = form.total_pages.data)
         flash("Added new book, titled: {}".format(form.title.data), "alert alert-success")
         return redirect("/setgoal")
@@ -157,7 +160,7 @@ def books(book_id = None):
         else:
             books_data = models.Book.select().where(models.Book.title.contains(search)).limit(24)
 
-            # amazon = AmazonAPI("jqwlxzk96k", "QTBsZPRuzC963Om8oLirb5fAI5sY8jbJ1ZMQvOg1")
+            # amazon = AmazonAPI("jqwlxzk96k", "QTBsZPRuzC963Om8oLirb5fAI5sY8jbJ1ZMQvOg1", "bookgoals-20")
         return render_template("books.html", books_template = books_data)
     else:
         book_ID = int(book_id)
