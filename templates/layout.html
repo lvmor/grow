@@ -25,8 +25,8 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/about">About</a></li>
                     {% if current_user.is_authenticated %}
-                    <li><a href="/books">Add Book</a></li>
-                    <li><a href="/mybooks">My Books</a></li>
+                    <li><a href="/books">Books</a></li>
+                    <li><a href="/mybooks">My Library</a></li>
                     <li><a href="/mygoals">My Goals</a></li>
                     <li><a href="/stats">Stats</a></li>
                     <li><a href="/achievements">Achievements</a></li>
@@ -76,6 +76,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="/static/main.js"></script>
 </body>
 
 </html>
