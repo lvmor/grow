@@ -1,12 +1,7 @@
 {% extends "layout.html"%}
 
 {% block content %}
-<div class="col text-center">
-    <form action="" method="GET">
-        <input id="search" name="search" placeholder="Search for book here" />
-        <button class="btn btn-success btn-md">Find</button>
-    </form>
-</div>
+
 {% for book in books_template %}
 <article>
     <div class="col-md-4" id="results">
