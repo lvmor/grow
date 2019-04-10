@@ -33,6 +33,7 @@ class User(UserMixin, Model):
         # except IntegrityError:
         #     raise ValueError("User/Email already exists")
 class Book(Model):
+    # timestamp = DateTimeField(default=datetime.datetime.now)
     title = TextField()
     image = TextField()
     author = TextField()
@@ -44,8 +45,10 @@ class Book(Model):
 
     class Meta:
         database = DATABASE
+        # order_by = ('-timestamp',)
 
 class Goal(Model):
+    # timestamp = DateTimeField(default=datetime.datetime.now)
     user_id = ForeignKeyField(model=User, backref="user")
     book_id = ForeignKeyField(model=Book, backref="book")
     start_date = TextField()
@@ -56,6 +59,7 @@ class Goal(Model):
 
     class Meta:
         database = DATABASE
+        # order_by = ('-timestamp',)
 
 def initialize():
     DATABASE.connect()
