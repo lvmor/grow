@@ -4,7 +4,7 @@ function bookSearch() {
     console.log(search)
 
     $.ajax({
-        url: "https://www.googleapis.com/books/v1/volumes?q=" + search,
+        url: "https://www.googleapis.com/books/v1/volumes?q=" + search + "&max-results=20",
         dataType: "json",
 
         success: function (data) {
@@ -16,21 +16,24 @@ function bookSearch() {
             for (i = 0; i < data.items.length; i++) {
 
 
-                if (count === 0) html += "<div class='row'>";
+                if (count === 0) html += "<div class='row form-group'>";
 
-                html += "<div class='col col-md-2'>";
-                html += "<form method='POST' action='' novalidate>";
-                html += "<input type = 'hidden' name = 'title' value = '" + data.items[i].volumeInfo.title + "' >"
-                html += '<input type="hidden" name="image" value="">'
-                html += '<input type="hidden" name="author" value="">'
-                html += '<input type="hidden" name="ISBN_13" value="">'
-                html += '<input type="hidden" name="ISBN_10" value="">'
-                html += '<input type="hidden" name="date_published" value="">'
-                html += '<input type="hidden" name="description" value="">'
-                html += '<input type="hidden" name="total_pages" value="">'
+                var isbn_10 = '';
+                if (data.items[i].volumeInfo.industryIdentifiers.length > 1) {
+                    isbn_10 = data.items[i].volumeInfo.industryIdentifiers[1].identifier;
+                }
+                html += "<div class='col col-md-2 form-group'>";
+                html += '<input type = "hidden" id = "title' + i + '" value = "' + data.items[i].volumeInfo.title + '" >'
+                html += '<input type="hidden" id="image' + i + '" value="' + data.items[i].volumeInfo.imageLinks.thumbnail + '">'
+                html += '<input type="hidden" id="author' + i + '" value="' + data.items[i].volumeInfo.authors + '">'
+                html += '<input type="hidden" id="ISBN_13' + i + '" value="' + data.items[i].volumeInfo.industryIdentifiers[0].identifier + '">'
+                html += '<input type="hidden" id="ISBN_10' + i + '" value="' + isbn_10 + '">'
+                html += '<input type="hidden" id="date_published' + i + '" value="' + data.items[i].volumeInfo.publishedDate + '">'
+                html += '<input type="hidden" id="description' + i + '" value="' + data.items[i].volumeInfo.description + '">'
+                html += '<input type="hidden" id="total_pages' + i + '" value="' + data.items[i].volumeInfo.pageCount + '">'
                 html += "<img width='165px' height='248px' src=' " + data.items[i].volumeInfo.imageLinks.thumbnail + " ' />";
-                html += "<button>Details</button>"
-                html += '</form >'
+                html += '<button onclick="detailsClick(' + i + ')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Details</button>'
+
                 //     results.innerHTML += "<div>" + data.items[i].volumeInfo.title + "</div>",
                 //     results.innerHTML += "<div> By: " + data.items[i].volumeInfo.authors + "</div>"
                 // results.innerHTML += "<div> ISBN-13: " + data.items[i].volumeInfo.industryIdentifiers[0].identifier + "</div>"
@@ -54,3 +57,21 @@ function bookSearch() {
 }
 
 document.getElementById("search-button").addEventListener("click", bookSearch, false)
+
+function detailsClick(index) {
+    //alert('copy details to modal ' + index)
+    $('#exampleModalLabel').text($('#title' + index).val());
+    $('#md_image').attr('src', $('#image' + index).val());
+    $('#md_author').text($('#author' + index).val());
+
+    $('#title').val($('#title' + index).val());
+    $('#image').val($('#image' + index).val());
+    $('#author').val($('#author' + index).val());
+    $('#ISBN_13').val($('#ISBN_13' + index).val());
+    $('#ISBN_10').val($('#ISBN_10' + index).val());
+    $('#date_published').val($('#date_published' + index).val());
+    $('#description').val($('#description' + index).val());
+    $('#total_pages').val($('#total_pages' + index).val());
+}
+
+
