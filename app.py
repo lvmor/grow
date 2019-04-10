@@ -154,13 +154,8 @@ def about():
 @app.route("/books/<book_id>", methods=["GET", "POST"])
 def books(book_id = None):
     if book_id == None:
-        search = request.args.get("search")
-        if search == "":
-            books_data = models.Book.select().limit(24)
-        else:
-            books_data = models.Book.select().where(models.Book.title.contains(search)).limit(24)
+        books_data = models.Book.select().limit(24)
 
-            # amazon = AmazonAPI("jqwlxzk96k", "QTBsZPRuzC963Om8oLirb5fAI5sY8jbJ1ZMQvOg1", "bookgoals-20")
         return render_template("books.html", books_template = books_data)
     else:
         book_ID = int(book_id)
