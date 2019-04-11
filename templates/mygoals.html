@@ -16,16 +16,18 @@
         <div class="col-md-3">
             <div class="row form-group">
                 <div class="col-md-10 progress" style="height: 2.5em">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: {{progress}}%"
-                        aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100">
-                        {{progress}}%</div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{goal.progress}}%"
+                        aria-valuenow="{{goal.progress}}" aria-valuemin="0" aria-valuemax="100">
+                        {{goal.progress}}%</div>
                 </div>
             </div>
         </div>
         <div class="col-md-1">
-            <a class="mygoals-btns btn btn-success btn-lg" href="/mygoals/{{goal.id}}">Details</a>
-            <a class="mygoals-btns btn btn-danger btn-lg" href="/delete/{{goal.id}}"
-                onclick="return confirm('Are you sure you want to delete this book goal? Action cannot be undone.') ">Delete</a>
+            <a class="mygoals-btns" href="/mygoals/{{goal.id}}"><img class="mygoals-svg"
+                    src="/static/images/buttons/details.svg"></a>
+            <a class="mygoals-btns" href="/delete/{{goal.id}}"
+                onclick="return confirm('Are you sure you want to delete this book goal? Action cannot be undone.') "><img
+                    class="mygoals-svg" src="/static/images/buttons/delete.svg"></a>
         </div>
     </div>
 </article>

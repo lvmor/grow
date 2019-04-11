@@ -5,6 +5,8 @@ from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash
 
 DATABASE = SqliteDatabase("grow.db")
+# pg_db = PostgresqlDatabase('grow', user='postgres', password='secret',
+#                            host='127.0.0.1', port=5432)
 
 class User(UserMixin, Model):
     name = CharField()

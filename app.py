@@ -3,6 +3,19 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_bcrypt import check_password_hash
 import json
+import os
+
+# import numpy as np
+# import plotly.graph_objs as go
+# import plotly.offline as ply
+# import dash
+# from dash.dependencies import Output, Event
+# import dash_core_components as doc
+# import dash_html_components as html
+# import plotly
+# import random
+# import plotly.graph_objs as go
+# from collections import deque
 
 
 import models
@@ -87,18 +100,24 @@ def delete(goal_id):
 def index():
     form = BookForm()
     if form.validate_on_submit():
-        models.Book.create(
-        image = form.image.data.strip(),
-        title = form.title.data.strip(),
-        author = form.author.data.strip(),
-        ISBN_13 = form.ISBN_13.data.strip(),
-        ISBN_10 = form.ISBN_10.data.strip(),
-        date_published = form.date_published.data.strip(),
-        description = form.description.data.strip(),
-        total_pages = form.total_pages.data)
-        flash("Added new book, titled: {}".format(form.title.data), "alert alert-success")
-        return redirect("/setgoal")
-        # return redirect('/books/{}'.format(book_id))
+        results = models.Book.select().where(models.Book.ISBN_13 == form.ISBN_13.data.strip() or models.Book.ISBN_10 == form.ISBN_10.data.strip()).limit(1)
+        if len(results) > 0:
+            book = results[0]            
+        else:
+            book = None
+        if book == None:
+            models.Book.create(
+            image = form.image.data.strip(),
+            title = form.title.data.strip(),
+            author = form.author.data.strip(),
+            ISBN_13 = form.ISBN_13.data.strip(),
+            ISBN_10 = form.ISBN_10.data.strip(),
+            date_published = form.date_published.data.strip(),
+            description = form.description.data.strip(),
+            total_pages = form.total_pages.data)
+            flash("Added new book, titled: {}".format(form.title.data), "alert alert-success")
+            book = models.Book.get(models.Book.ISBN_13 == form.ISBN_13.data.strip() or models.Book.ISBN_10 == form.ISBN_10.data.strip())
+        return redirect("/setgoal/{}".format(book.id))
             
     return render_template("add_book.html", title = "Add Form", form = form)
 
@@ -164,10 +183,20 @@ def books(book_id = None):
 
 @app.route("/mybooks")
 @app.route("/mybooks/")
+@app.route("/mybooks/<book_id>")
 @login_required
-def mybooks():
-    books = models.Book.select().limit()
-    return render_template("mybooks.html")
+def mybooks(book_id = None):
+    if book_id == None:
+        mybooks = models.MyLibrary.select().where(models.MyLibrary.user_id == current_user.id).limit(9)
+        return render_template("mybooks.html", mybooks = mybooks)
+    else:
+        found = models.MyLibrary.select().where(models.MyLibrary.user_id == current_user.id and models.MyLibrary.book_id == book_id)
+        if found.count() == 0:
+            models.MyLibrary.create(book_id = book_id, user_id = current_user.id)
+            flash("Book has been added to your library!", "alert alert-success")
+        return redirect("/mybooks")
+        flash("You have already added this book!", "alert alert-info")
+
 
 @app.route("/setgoal", methods=["GET", "POST"])
 @app.route("/setgoal/", methods=["GET", "POST"])
@@ -202,7 +231,9 @@ def setgoal(book_id = None):
 @login_required
 def mygoals(goal_id = None):
     if goal_id == None:
-        goals_data = models.Goal.select().limit(10)
+        goals_data = models.Goal.select().where(models.Goal.user_id == current_user.id).limit(100)
+        for goal in goals_data:
+            goal.progress = int((goal.book_progress / goal.book_id.total_pages) * 100)
         return render_template("mygoals.html", goals_template = goals_data)
     # goalid = request.form.get("goalid", "")
     # command = request.form.get("submit", "")
@@ -212,10 +243,11 @@ def mygoals(goal_id = None):
     #     return redirect("/mygoals")
     else:
         goal_ID = int(goal_id)
-
+       
 
         goal = models.Goal.get(models.Goal.id == goal_ID)
         if request.method == "POST":
+            print("adding pages")
             pages = int(request.form["pages"])
             if pages >= 0 and pages <= goal.book_id.total_pages:
                 goal.book_progress = pages
@@ -272,12 +304,55 @@ def mygoals(goal_id = None):
     #         flash("Added a new book goal!", "alert alert-success")
     #         return redirect("/mygoals/{}".format(goal_id))
 
+
     # return render_template("mygoal.html", goal = goal, progress = progress)
+
+
+# X =deque(maxlen=20)
+# Y = deque(maxlen=20)
+# X.append(1)
+# Y.append(1)
+
+# app = dash.Dash(__name__)
+# app.layout = html.Div(
+#     [doc.Graph(id="live-graph", animate =True),
+#     doc.Interval (
+#         id="graph-update",
+#         interval=1000
+#     )]
+# )
+
+# @app.callback(Output("live-graph", "figure")), events = [Event("graph-update", "inteval")]
+# def graphstats():
+#     X.append(X[-1]+1)
+#     Y.append(X[-2]+2)
+
+#     data = go.Scatter(
+#         x=list(X),
+#         y=list(Y),
+#         name="Scatter",
+#         mode="lines+markers"
+#     )
+
+#     return {"data: [data], "layout": go.Layout(xaxis) = dict(range=[min(X), max(X)]), (yaxis) = dict(range=[min(Y), max(Y)])}
+
+# if __name__ == "__main__":
+#     app.run_server(debug=True)
 
 @app.route("/stats")
 @app.route("/stats/")
 @login_required
 def stats():
+
+    # n = 201
+    # x = np.linspace(0, 2.0*np.pi, n)
+    # y1 = np.sin(x)
+    # y2 = np.cos(x)
+    # y3 = y1 + y2
+    # trace1 = go.Scatter(x = x, y1 = y1)
+    # data = [trace1]
+
+    # ply.plot(data, filename = 'simple_plot.html')
     return render_template("stats.html")
 
 @app.route("/achievements")
@@ -286,18 +361,11 @@ def stats():
 def achievements():
     return render_template("achievements.html")
 
+if 'ON_HEROKU' in os.environ:
+    print('hitting ')
+    models.initialize()
+    
 if __name__ == '__main__':
     models.initialize()
-    # try:
-    #     models.User.create_user(
-    #         name = "Mr. User",
-    #         username = "mr.username",
-    #         email = "user@io.com",
-    #         password = "dog",
-    #         avatar = "user.png",
-    #         genre = "Self-development"
-    #         )
-    # except ValueError:
-    #     pass
 
     app.run(debug=DEBUG, port=PORT)

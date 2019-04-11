@@ -10,25 +10,42 @@
         <img src="{{goal.book_id.image}}" style=" width: 100%" />
     </div>
     <div class="col-md-8">
-        <h2> Title: {{ goal.book_id.title }} </h2>
-        <h2> Status: {{ goal.status }} </h2>
-        <h2> Book Progress: {{ goal.book_progress }} / {{ goal.book_id.total_pages}} pages</h2>
-        <h2> Start date: {{ goal.start_date }} </h2>
-        <h2> End date: {{ goal.end_date }} </h2>
-        <h2> Notes: {{ goal.notes }} </h2>
+        <div class="row">
+            <div class="col-md-8">
+                <h4> {{ goal.book_id.title }} </h4>
+            </div>
+            <div class="col-md-4">
+                <h4> <img src="/static/images/icons/book.png" style="width: 2em" /> {{ goal.book_progress }} /
+                    {{ goal.book_id.total_pages}}
+                </h4>
+            </div>
+        </div>
+
+
+
+        <h5> By: {{ goal.book_id.author }} </h5>
+        <div class="row">
+
+            <div class="col">
+                <h4> {{ goal.status }} </h4>
+            </div>
+        </div>
+        <h4> Start date: {{ goal.start_date }} </h4>
+        <h4> End date: {{ goal.end_date }} </h4>
+        <h4> <img src="/static/images/icons/note.png" style="width: 2em" /> {{ goal.notes }} </h4>
 
         <form action="" method="POST">
             <input name="goalid" type="hidden" value="{{goal.id}}">
             <input class="form-control mr-sm-2" type="text" name="pages" placeholder="Current Page" />
             <textarea class="form-control mr-sm-2" type="text" name="notes" placeholder="Notes"></textarea>
-            <button class="btn btn-success">Update</button>
+            <button><img src="/static/images/buttons/update.svg" /></button>
         </form>
     </div>
     </div>
     <div class="row form-group">
-        <div class="col-md-10 progress" style="height: 2.5em">
-            <div class="progress-bar bg-success" role="progressbar" style="width: {{progress}}%"
-                aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100">
+        <div class="col-md-10 progress" style="height: 3em">
+            <div class="progress-bar " role="progressbar" style="width: {{progress}}%" aria-valuenow="{{progress}}"
+                aria-valuemin="0" aria-valuemax="100">
                 {{progress}}%</div>
         </div>
     </div>
