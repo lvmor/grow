@@ -2,16 +2,23 @@
 
 {% block content %}
 
-<h1>My Books </h1>
+<section class="mylibrary-wrapper">
+    {% for mybook in mybooks %}
+    <article>
+        <div class="col-md-4" id="results">
 
-<section>
-    <a class="btn btn-success btn-md" href="/mygoals">My Goals</a>
-    <div>
-        <h2>In Progress: </h2>
-    </div>
-    <div>
-        <h2>Completed: </h2>
-    </div>
+            <div class="form-group">
+
+                <div class="col text-center">
+                    <h3>{{ mybook.book_id.title }}</h3>
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+    {% endfor %}
 </section>
 
 {% endblock %}
