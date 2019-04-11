@@ -22,7 +22,7 @@ function bookSearch() {
                 if (data.items[i].volumeInfo.industryIdentifiers.length > 1) {
                     isbn_10 = data.items[i].volumeInfo.industryIdentifiers[1].identifier;
                 }
-                html += "<div class='col col-md-2 form-group'>";
+                html += "<div class='col col-md-4 form-group text-center'>";
                 html += '<input type = "hidden" id = "title' + i + '" value = "' + data.items[i].volumeInfo.title + '" >'
                 html += '<input type="hidden" id="image' + i + '" value="' + data.items[i].volumeInfo.imageLinks.thumbnail + '">'
                 html += '<input type="hidden" id="author' + i + '" value="' + data.items[i].volumeInfo.authors + '">'
@@ -32,7 +32,8 @@ function bookSearch() {
                 html += '<input type="hidden" id="description' + i + '" value="' + data.items[i].volumeInfo.description + '">'
                 html += '<input type="hidden" id="total_pages' + i + '" value="' + data.items[i].volumeInfo.pageCount + '">'
                 html += "<img width='165px' height='248px' src=' " + data.items[i].volumeInfo.imageLinks.thumbnail + " ' />";
-                html += '<button onclick="detailsClick(' + i + ')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Details</button>'
+                html += '<a onclick="detailsClick(' + i + ')" type="button" class="details-btn" data-toggle="modal" data-target="#exampleModal"><img src="/static/images/buttons/add1.svg"></a>'
+
 
                 //     results.innerHTML += "<div>" + data.items[i].volumeInfo.title + "</div>",
                 //     results.innerHTML += "<div> By: " + data.items[i].volumeInfo.authors + "</div>"
@@ -63,7 +64,11 @@ function detailsClick(index) {
     $('#exampleModalLabel').text($('#title' + index).val());
     $('#md_image').attr('src', $('#image' + index).val());
     $('#md_author').text($('#author' + index).val());
-
+    $('#md_ISBN_13').text($('#ISBN_13' + index).val());
+    $('#md_ISBN_10').text($('#ISBN_10' + index).val());
+    $('#md_date_published').text($('#date_published' + index).val());
+    $('#md_description').text($('#description' + index).val());
+    $('#md_total_pages').text($('#total_pages' + index).val());
     $('#title').val($('#title' + index).val());
     $('#image').val($('#image' + index).val());
     $('#author').val($('#author' + index).val());
