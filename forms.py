@@ -60,7 +60,7 @@ class BookForm(Form):
     date_published = TextField("date published: ")
     description = TextAreaField("description: ")
     total_pages = IntegerField("Total pages")
-    submit = SubmitField("Add Book")
+    submit = SubmitField("Set Goal")
 
 class GoalForm(Form):
     id = HiddenField()
