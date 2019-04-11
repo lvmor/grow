@@ -20,54 +20,6 @@ a.nav-link {
 }
 
 /* ----------------------------------------
-Books
-------------------------------------------- */
-
-.main-search {
-    width: 50%;
-    margin: 50px auto;
-}
-
-.details-btn{
-    margin-top:1em;
-}
-
-/* ----------------------------------------
-My Library
-------------------------------------------- */
-/* body{
-    background-image: url(https://images.assetsdelivery.com/compings_v2/baks/baks1410/baks141000016.jpg);
-    width: 100%;
-}
-
-.mylibrary-wrapper {
-    background: url(/static/images/shelf.png) no-repeat center center fixed;
-    background-size: cover;
-    height: 100%;
-    overflow: hidden;
-  } */
-
-
-/* ----------------------------------------
-My Goals
-------------------------------------------- */
-.mygoals-svg {
-    margin: .5em;
-}
-
-/* ----------------------------------------
-My Goal
-------------------------------------------- */
-
-.book-modal-text {
-  font-size: 1em;
-}
-
-.progress-bar {
-  background-color: #B0D959 !important;
-}
-
-/* ----------------------------------------
 About
 ------------------------------------------- */
 
@@ -91,4 +43,47 @@ h1.main-content-header {
 
 span.main-content-header {
   font-size: .75em;
+}
+
+.sec-about, .sec-stats {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* ----------------------------------------
+Books
+------------------------------------------- */
+
+.main-search {
+    width: 50%;
+    margin: 50px auto;
+}
+
+.details-btn{
+    margin-top:1em;
+}
+
+/* ----------------------------------------
+My Library
+------------------------------------------- */
+  .mylibrary-wrapper {
+    padding: 2em;
+  }
+
+/* ----------------------------------------
+My Goals
+------------------------------------------- */
+.mygoals-svg {
+    margin: .5em;
+}
+
+/* ----------------------------------------
+My Goal
+------------------------------------------- */
+
+.book-modal-text {
+  font-size: 1em;
+}
+
+.progress-bar {
+  background-color: #B0D959 !important;
 }
