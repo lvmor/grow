@@ -1,37 +1,81 @@
 {% extends "layout.html"%}
 
 {% block content %}
-<h1>About</h1>
-
-<div class='container-fluid no-padding'>
-    <div class='row text-center'>
-        <h1>Welcome</h1>
-        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. </h4>
+<header class="about_header about_header-fluid">
+    <div class="about_container">
+        <h1 class="main-content-header">Grow <br><span class="main-content-header">Read more, learn more.</span></h1>
     </div>
-    <br>
-    <br>
-    <div class='row'>
-        <div class='col-md-12 text-center use-container'>
-            <h1> Easy as 1, 2, 3</h1>
+</header>
 
-            <h3>Search & Add Book</h3>
-            <h3>Set a Goal</h3>
-            <h3>Check Progress</h3>
+<section id="sec-about" class="sec-about pt-5 pb-5 text-center">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-10 col-lg-8">
+                <h1 class="h4">Three Easy Steps:</h1>
+            </div>
+        </div>
 
+        <div class="row mt-4">
+            <div class="col-sm-4">
+                <h4><img src="/static/images/icons/book.png" style="width: 2em" /></h4>
+
+                <hr />
+
+                <h5>Find your Book</h5>
+            </div>
+
+            <div class="col-sm-4">
+                <h4><img src="/static/images/icons/goal.png" style="width: 2em" /></h4>
+
+                <hr />
+
+                <h5>Set a Goal</h5>
+            </div>
+
+            <div class="col-sm-4">
+                <h4><img src="/static/images/icons/progress.png" style="width: 2em" /></h4>
+
+                <hr />
+
+                <h5>Check your Progress</h5>
+            </div>
         </div>
     </div>
-    <div class='row text-center'>
-        <h1>Earn Achievements</h1>
-        <a href="#"><img src="https://invisioncommunity.co.uk/wp-content/uploads/2018/07/ps4-trophies.jpg"></a>
-    </div>
+</section>
 
-    <div class='row text-center'>
-        <h1>Stats & Infographics</h1>
-        <a href="#"><img
-                src="https://is1-ssl.mzstatic.com/image/thumb/Purple128/v4/85/65/34/8565341f-aaff-1e79-0b22-d21556e5412c/mzl.uldxndza.png/300x0w.jpg"></a>
+<section id="sec-about" class="sec-about pt-5 pb-5 text-center">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-10 col-lg-8">
+                <p class="about_paragraph">This app was made for people to set reading goals, track their progress
+                    (based on the amount of pages read), and get motivated to read more.</p>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+
+<hr />
+
+<section id="sec-about" class="sec-about pt-5 pb-5 text-center">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-10 col-lg-8">
+                <h2 class="about_paragraph">Stats & Infographics</h2>
+            </div>
+        </div>
+
+    </div>
+</section>
+<hr />
+
+<section id="sec-about" class="sec-about pt-5 pb-5 text-center">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-10 col-lg-8">
+                <h2 class="about_paragraph">Earn Achievements</h2>
+            </div>
+        </div>
+
+    </div>
+</section>
 {% endblock %}
