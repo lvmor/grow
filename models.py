@@ -61,7 +61,15 @@ class Goal(Model):
         database = DATABASE
         # order_by = ('-timestamp',)
 
+class MyLibrary(Model):
+    # timestamp = DateTimeField(default=datetime.datetime.now)
+    user_id = ForeignKeyField(model=User, backref="user")
+    book_id = ForeignKeyField(model=Book, backref="book")
+
+    class Meta:
+        database = DATABASE
+
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([Book, User, Goal], safe=True)
+    DATABASE.create_tables([Book, User, Goal, MyLibrary], safe=True)
     DATABASE.close()
