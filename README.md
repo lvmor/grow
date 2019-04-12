@@ -54,7 +54,7 @@ Achievements
 Changes I would make to this project if I continued to work on it:
 
 - Create a mobile app
-- Add data visualization chart for #pages and date
+- Add data visualization chart for # of pages and date
 - Add reminders feature
 
 ---
