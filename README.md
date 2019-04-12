@@ -39,7 +39,7 @@ My Library Page
 - Add Books from other users
 
 My Goals & My Goal Pages
-- Full CRUD for Goals
+- CRUD for Goals
 
 Stats Page
 - Data Visualization Charts
