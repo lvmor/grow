@@ -26,8 +26,7 @@ This app was made for people to set reading goals, track their progress (based o
 ## Website
 <img width="1395" alt="grow-website" src="https://user-images.githubusercontent.com/46200110/56040669-c8f3c680-5ceb-11e9-9e32-3626c5fb52fb.png">
 
-![Desktop-Website](https://user-images.githubusercontent.com/46200110/56063436-1c820680-5d24-11e9-8807-37da3059b75c.jpg)
-
+![Desktop-Website-Grow](https://user-images.githubusercontent.com/46200110/56063552-7256ae80-5d24-11e9-9a62-8e3ce6469ee3.jpg)
 ## Existing Features
 
 Landing Page
