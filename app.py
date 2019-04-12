@@ -168,14 +168,17 @@ def index():
 def about():
     return render_template("about.html")
 
+
+
 @app.route("/books")
 @app.route("/books/")
 @app.route("/books/<book_id>", methods=["GET", "POST"])
 def books(book_id = None):
     if book_id == None:
         books_data = models.Book.select().limit(24)
+        mybooks = models.MyLibrary.select().where(models.MyLibrary.user_id == current_user.id).limit(9)
 
-        return render_template("books.html", books_template = books_data)
+        return render_template("books.html", books_template = books_data, mybooks = mybooks)
     else:
         book_ID = int(book_id)
         book = models.Book.get(models.Book.id == book_ID)
@@ -190,12 +193,13 @@ def mybooks(book_id = None):
         mybooks = models.MyLibrary.select().where(models.MyLibrary.user_id == current_user.id).limit(9)
         return render_template("mybooks.html", mybooks = mybooks)
     else:
-        found = models.MyLibrary.select().where(models.MyLibrary.user_id == current_user.id and models.MyLibrary.book_id == book_id)
-        if found.count() == 0:
-            models.MyLibrary.create(book_id = book_id, user_id = current_user.id)
-            flash("Book has been added to your library!", "alert alert-success")
-        return redirect("/mybooks")
-        flash("You have already added this book!", "alert alert-info")
+        # found = models.MyLibrary.select().where(models.MyLibrary.user_id == current_user.id and models.MyLibrary.book_id == book_id)
+        # if found.count() == 0:
+        models.MyLibrary.create(book_id = book_id, user_id = current_user.id)
+        flash("Book has been added to your library!", "alert alert-success")
+
+        return redirect("/books")
+        # flash("You have already added this book!", "alert alert-info")
 
 
 @app.route("/setgoal", methods=["GET", "POST"])
@@ -364,7 +368,7 @@ def achievements():
 if 'ON_HEROKU' in os.environ:
     print('hitting ')
     models.initialize()
-    
+
 if __name__ == '__main__':
     models.initialize()
 
