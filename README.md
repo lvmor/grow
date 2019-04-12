@@ -29,17 +29,18 @@ Landing Page
 - Elastic Search Bar
 - External API (Google Books API)
 
-My Books Page
-- Book Page & Form with full CRUD
+My Library Page
+- Add your Books
+- Add Books from other users
 
-My Goals Page
-- Goals Page & Form with full CRUD
+My Goals & My Goal Pages
+- Full CRUD for Goals
 
 Stats Page
-- Python Data Visualization Charts
+- Data Visualization Charts
 
 Achievements
-- Earn achievement feature
+- Puzzle Board Feature
 
 ---
 
@@ -47,9 +48,9 @@ Achievements
 
 Changes I would make to this project if I continued to work on it:
 
-- create a mobile app
-- refactor and use REACT
-- add reminders feature
+- Create a mobile app
+- Add data visualization chart for #pages and date
+- Add reminders feature
 
 ---
 
@@ -63,10 +64,13 @@ Changes I would make to this project if I continued to work on it:
 Wins
 
 - External API.
+- Achievements Page.
+- Data Visualization Charts.
 
 Challenges
 
 - External API.
 - Refactoring.
+- Data Visualization Charts
 
 ---
