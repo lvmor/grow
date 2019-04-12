@@ -3,21 +3,28 @@
 This app was made for people to set reading goals, track their progress (based on amount of pages read), and get motivated to read more.
 
 
-- [Grow Website](https://herokuapp.com/)
+- [Grow Website](https://grow-flask.herokuapp.com/)
 
 ---
 
 ## Technologies Used
 - [Python](https://www.python.org/)
-- [WTForms](https://wtforms.readthedocs.io/en/stable/)
 - [Flask](http://flask.pocoo.org/docs/1.0/)
-- [Jinja](http://jinja.pocoo.org/)
 - [SQLite](https://www.sqlite.org/index.html)
-- [Vanilla JS]()
+- [WTForms](https://wtforms.readthedocs.io/en/stable/)
+- [Jinja](http://jinja.pocoo.org/)
+- [Vanilla JS](http://vanilla-js.com/)
+- [jQuery](http://jquery.com/)
 - [Bootstrap](https://getbootstrap.com/)
+- [CanvasJS](https://canvasjs.com/html5-javascript-pie-chart/)
 
 ---
 
+## Entity Relationship Diagram (ERD)
+<img width="669" alt="Grow-ERD" src="https://user-images.githubusercontent.com/46200110/56025016-26751c80-5cc6-11e9-9f4d-3fb5fc6b33bc.png">
+
+## Website
+<img width="1395" alt="grow-website" src="https://user-images.githubusercontent.com/46200110/56040669-c8f3c680-5ceb-11e9-9e32-3626c5fb52fb.png">
 
 ## Existing Features
 
@@ -25,19 +32,20 @@ Landing Page
 
 - Authentication & Validation (User Log-In & Sign-Up)
 - Elastic Search Bar
-- Populated External API (Google Books API)
+- External API (Google Books API)
 
-My Books Page
-- Book Page & Form with full CRUD
+My Library Page
+- Add your Books
+- Add Books from other users
 
-My Goals Page
-- Goals Page & Form with full CRUD
+My Goals & My Goal Pages
+- Full CRUD for Goals
 
 Stats Page
-- Python Data Visualization Charts
+- Data Visualization Charts
 
 Achievements
-- Earn achievement feature
+- Puzzle Board Feature
 
 ---
 
@@ -45,14 +53,15 @@ Achievements
 
 Changes I would make to this project if I continued to work on it:
 
-- create a mobile app
-- refactor and use REACT
-- add reminders feature
+- Create a mobile app
+- Add data visualization chart for # of pages and date
+- Add reminders feature
 
 ---
 
-##### Screenshot
+##### Code Screenshot
 
+<img width="1152" alt="snippet_of_code" src="https://user-images.githubusercontent.com/46200110/56040753-f6d90b00-5ceb-11e9-826b-4cd270c5c07a.png">
 
 ---
 
@@ -61,10 +70,13 @@ Changes I would make to this project if I continued to work on it:
 Wins
 
 - External API.
+- Achievements Page.
+- Data Visualization Charts.
 
 Challenges
 
 - External API.
 - Refactoring.
+- Data Visualization Charts.
 
 ---
