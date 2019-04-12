@@ -87,3 +87,12 @@ My Goal
 .progress-bar {
   background-color: #B0D959 !important;
 }
+
+/* ----------------------------------------
+Achievements
+------------------------------------------- */
+
+.puzzle-image {
+  background-image: url(/static/images/wood.jpg);
+  width: 100%;
+}
