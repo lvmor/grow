@@ -1,9 +1,10 @@
-from flask import Flask, g
+from flask import Flask, g, jsonify
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_bcrypt import check_password_hash
 import json
 import os
+from playhouse.shortcuts import model_to_dict, dict_to_model
 
 # import numpy as np
 # import plotly.graph_objs as go
@@ -168,7 +169,13 @@ def index():
 def about():
     return render_template("about.html")
 
-
+# TODOS:
+# [] filter books_data to only show books that HAVE NOT yet been added
+# [] comment out the mybooks route, test the app to check for breaks
+# [] remove my library from navbar
+# [] move "Set Goal" functionality to the My Library list
+# [X] rename "Set Goal" nav item to something else
+# [] rename/remove the set pages goal on the set goal page
 
 @app.route("/books")
 @app.route("/books/")
@@ -359,11 +366,44 @@ def stats():
     # ply.plot(data, filename = 'simple_plot.html')
     return render_template("stats.html")
 
+@app.route("/stats_goals")
+@app.route("/stats_goals/")
+@login_required
+def stats_goals():
+    goals = models.Goal.select().where(models.Goal.user_id == current_user.id).limit(100)
+    #goals_data = model_to_dict(goals_data)
+    list = []
+    for goal in goals:
+       g = {}
+       g["goalid"] = goal.id
+       g["title"] = goal.book_id.title
+       g["pages"] = goal.book_id.total_pages
+       g["pages_read"] = goal.book_progress
+       list.append(g)
+    return jsonify(list)
+
 @app.route("/achievements")
 @app.route("/achievements/")
 @login_required
 def achievements():
     return render_template("achievements.html")
+
+@app.route("/achievements_goals")
+@app.route("/achievements_goals/")
+@login_required
+def achievements_goals():
+    goals = models.Goal.select().where(models.Goal.user_id == current_user.id)
+    #goals_data = model_to_dict(goals_data)
+    progress = {}
+    pages_read = 0
+    pages_all = 0
+    for goal in goals:       
+       pages_read += goal.book_progress
+       pages_all += goal.book_id.total_pages
+    progress["pages_read"] = pages_read
+    progress["pages_all"] = pages_all
+
+    return jsonify(progress)
 
 if 'ON_HEROKU' in os.environ:
     print('hitting ')
