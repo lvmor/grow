@@ -1,32 +1,42 @@
 {% extends "layout.html"%}
 
 {% block content %}
-
-
-{% for book in books_template %}
-<article>
-    <div class="col-md-4" id="results">
-
-        <div class="form-group">
-
-            <div class="col text-center">
-                <h3>{{ book.title }}</h3>
-            </div>
-            <div class="col text-center form-group">
-                <a href="{{url_for("books", book=book.id)}}"><img src="{{book.image}}" /></a>
-            </div>
-            <div class="col text-center">
-                <a class="btn btn-success btn-md" href="/books/{{book.id}}">Set Goal</a>
-                <a class="" href="/mybooks/{{book.id}}"><img src="/static/images/buttons/add1.svg"></a>
-
-            </div>
-
-        </div>
+<h1 class="main-header-text">My Library</h1>
+<div class="row mylibrary-wrapper" id="results">
+    {% for mybook in mybooks %}
+    <div class="col-md-3 form-group">
+        <a href="/setgoal/{{mybook.book_id.id}}">
+            <img src="{{ mybook.book_id.image }}" alt="{{ mybook.book_id.title }}" style="height: 189px" />
+        </a>
 
     </div>
+    {% endfor %}
+</div>
+<article>
+    <h2>Books from other Readers</h2>
+    <hr>
+    <div class="row">
+        {% for book in books_template %}
 
+        <div class="col-md-3" id="results">
+            <div class="form-group">
+                <div class="col">
+                    <a class="rounded" href="/mybooks/{{book.id}}"><img src="/static/images/buttons/add1.svg"></a>
+                </div>
+                <div class="col text-center form-group">
+                    <a href="/setgoal/{{book.id}}"><img height=" 189px" src="{{book.image}}" /></a>
+                </div>
+                <div class="col text-center">
+                    <div class="col text-center">
+                        <h5>{{ book.title }}</h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
 </article>
-
-{% endfor %}
 
 {% endblock %}

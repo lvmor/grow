@@ -1,11 +1,13 @@
 {% extends "layout.html"%}
 
 {% block content %}
-<h1 class="text-headers">My Library</h1>
+<h1 class="main-header-text">My Library</h1>
 <div class="row mylibrary-wrapper" id="results">
     {% for mybook in mybooks %}
     <div class="col-md-3 form-group">
-        <img src="{{ mybook.book_id.image }}" alt="{{ mybook.book_id.title }}" style="height: 15em" />
+        <a href="/setgoal/{{mybook.book_id.id}}">
+            <img src="{{ mybook.book_id.image }}" alt="{{ mybook.book_id.title }}" style="height: 15em" />
+        </a>
 
     </div>
     {% endfor %}
