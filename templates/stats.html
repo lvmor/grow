@@ -4,4 +4,84 @@
 
 <h1>Stats</h1>
 
+
+<script>
+
+
+    window.onload = function () {
+
+
+        $.ajax({
+            url: '/stats_goals',
+            success: function (data) {
+
+                var dataPoints = data.map(function (goal, index) {
+                    var pt = {};
+                    pt.x = index;
+                    pt.y = goal.pages;
+                    pt.indexLabel = goal.title
+                    return pt;
+                });
+                console.log(dataPoints);
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    exportEnabled: true,
+                    theme: "light1", // "light1", "light2", "dark1", "dark2"
+                    title: {
+                        text: "My Current Book(s) with pages"
+                    },
+                    data: [{
+                        type: "column", //change type to bar, line, area, pie, etc
+                        //indexLabel: "{y}", //Shows y value on all Data Points
+                        indexLabelFontColor: "#5A5757",
+                        indexLabelPlacement: "outside",
+                        dataPoints: dataPoints
+                    }]
+                });
+                chart.render();
+
+            }
+        });
+
+        $.ajax({
+            url: '/stats_goals',
+            success: function (data) {
+                var total = 0;
+                data.forEach(function (goal) {
+                    total += goal.pages;
+                });
+
+                console.log(total);
+                var dataPoints = data.map(function (goal, index) {
+                    var pt = {};
+                    pt.y = (goal.pages / total) * 100;
+                    pt.label = goal.title
+                    return pt;
+                });
+                console.log(dataPoints);
+                var chart = new CanvasJS.Chart("chartContainerPie", {
+                    animationEnabled: true,
+                    title: {
+                        text: "Books Pie Chart"
+                    },
+                    data: [{
+                        type: "pie",
+                        startAngle: 240,
+                        yValueFormatString: "##0.00\"%\"",
+                        indexLabel: "{label} {y}",
+                        dataPoints: dataPoints
+                    }]
+                });
+                chart.render();
+            }
+        })
+
+    }
+</script>
+
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<div id="chartContainerPie" style="height: 300px; width: 100%;"></div>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 {% endblock %}
