@@ -23,6 +23,8 @@ This app was made for people to set reading goals, track their progress (based o
 ## Entity Relationship Diagram (ERD)
 <img width="669" alt="Grow-ERD" src="https://user-images.githubusercontent.com/46200110/56025016-26751c80-5cc6-11e9-9f4d-3fb5fc6b33bc.png">
 
+## Website
+<img width="1405" alt="grow-website" src="https://user-images.githubusercontent.com/46200110/56025446-faa66680-5cc6-11e9-85cd-f14907097a21.png">
 
 ## Existing Features
 
