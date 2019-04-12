@@ -200,13 +200,16 @@ def mybooks(book_id = None):
         mybooks = models.MyLibrary.select().where(models.MyLibrary.user_id == current_user.id).limit(9)
         return render_template("mybooks.html", mybooks = mybooks)
     else:
-        # found = models.MyLibrary.select().where(models.MyLibrary.user_id == current_user.id and models.MyLibrary.book_id == book_id)
-        # if found.count() == 0:
-        models.MyLibrary.create(book_id = book_id, user_id = current_user.id)
-        flash("Book has been added to your library!", "alert alert-success")
+        print("user_id = " + str(current_user.id) + ", book_id = " + book_id)
+        found = models.MyLibrary.select().where(models.MyLibrary.book_id == book_id).where(models.MyLibrary.user_id == current_user.id)
 
+        if found.count() == 0:
+            models.MyLibrary.create(book_id = book_id, user_id = current_user.id)
+            flash("Book has been added to your library!", "alert alert-success")
+        else:
+            flash("You have already added this book!", "alert alert-info")
         return redirect("/books")
-        # flash("You have already added this book!", "alert alert-info")
+        
 
 
 @app.route("/setgoal", methods=["GET", "POST"])
@@ -214,9 +217,10 @@ def mybooks(book_id = None):
 @app.route("/setgoal/<book_id>", methods=["GET", "POST"])
 @login_required
 def setgoal(book_id = None):
+    # SetGoal: Sets the reading goal for a book.
     form = GoalForm()
     if form.validate_on_submit():
-        found = models.Goal.select().where(models.Goal.user_id == current_user.id and models.Goal.book_id == book_id)
+        found = models.Goal.select().where(models.Goal.book_id == book_id).where(models.Goal.user_id == current_user.id)
         print(found.count())
         if found.count()  == 0:
             models.Goal.create(
@@ -242,31 +246,27 @@ def setgoal(book_id = None):
 @login_required
 def mygoals(goal_id = None):
     if goal_id == None:
+        # get list of my goals - books
         goals_data = models.Goal.select().where(models.Goal.user_id == current_user.id).limit(100)
         for goal in goals_data:
+            # get progress of each goal for displaying in progress bar
             goal.progress = int((goal.book_progress / goal.book_id.total_pages) * 100)
         return render_template("mygoals.html", goals_template = goals_data)
-    # goalid = request.form.get("goalid", "")
-    # command = request.form.get("submit", "")
-
-    # if command == "Delete":
-    #     models.Goal.delete_by_id(goalid)
-    #     return redirect("/mygoals")
     else:
+        # display details of individual goal
         goal_ID = int(goal_id)
-       
-
+    
         goal = models.Goal.get(models.Goal.id == goal_ID)
         if request.method == "POST":
-            print("adding pages")
-            pages = int(request.form["pages"])
-            if pages >= 0 and pages <= goal.book_id.total_pages:
+            # updating page read count
+            pages = int(request.form["pages"]) # get pages from textbox in form
+            if pages >= 0 and pages <= goal.book_id.total_pages: # pages can be  0 to total pages of book
                 goal.book_progress = pages
-                goal.save()
+                goal.save() # save to database
                 flash("Your goal has been updated!", "alert alert-success")
             else:
                 flash("Cannot update. Incorrect value for pages.", "alert alert-danger")
-        progress = int((goal.book_progress / goal.book_id.total_pages) * 100)
+        progress = int((goal.book_progress / goal.book_id.total_pages) * 100) # pages read / total pages of book * 100
         return render_template("mygoal.html", goal = goal, progress = progress)
 
     # form = GoalForm()
@@ -392,14 +392,16 @@ def achievements():
 @app.route("/achievements_goals/")
 @login_required
 def achievements_goals():
+    # returns total pages read by user
+
     goals = models.Goal.select().where(models.Goal.user_id == current_user.id)
     #goals_data = model_to_dict(goals_data)
     progress = {}
     pages_read = 0
     pages_all = 0
     for goal in goals:       
-       pages_read += goal.book_progress
-       pages_all += goal.book_id.total_pages
+       pages_read += goal.book_progress # total pages read from book
+       pages_all += goal.book_id.total_pages # total pages of book
     progress["pages_read"] = pages_read
     progress["pages_all"] = pages_all
 
