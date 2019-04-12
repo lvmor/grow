@@ -1,5 +1,21 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Achievements</h1>
+<div>
+    <h1>Achievements</h1>
+    <div id="progress" class="row puzzle-image">
+    </div>
+    <script>
+        $.ajax({
+            url: '/achievements_goals',
+            success: function (data) {
+                //alert('Total: ' + data.pages_all + ', Read: ' + data.pages_read);
+                var total = data.pages_read / 100;
+                for (i = 1; i < total - 1; i++) {
+                    $('#progress').append('<div class="col col-md-3"><img height="285px" width="285px" src="/static/images/puzzle/bg_0' + i + '.png"></div>');
+                }
+            }
+        });
+    </script>
+</div>
 {% endblock %}
