@@ -76,6 +76,6 @@ Challenges
 
 - External API.
 - Refactoring.
-- Data Visualization Charts
+- Data Visualization Charts.
 
 ---
