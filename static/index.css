@@ -86,6 +86,9 @@ My Goal
 
 .progress-bar {
   background-color: #B0D959 !important;
+  color: black;
+  font-weight: 900;
+  font-size: 2em;
 }
 
 /* ----------------------------------------
