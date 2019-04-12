@@ -1,24 +1,14 @@
 {% extends "layout.html"%}
 
 {% block content %}
-
-<section class="mylibrary-wrapper">
+<h1 class="text-headers">My Library</h1>
+<div class="row mylibrary-wrapper" id="results">
     {% for mybook in mybooks %}
-    <article>
-        <div class="col-md-4" id="results">
+    <div class="col-md-3 form-group">
+        <img src="{{ mybook.book_id.image }}" alt="{{ mybook.book_id.title }}" style="height: 15em" />
 
-            <div class="form-group">
-
-                <div class="col text-center">
-                    <img src="{{ mybook.book_id.image }}" alt="{{ mybook.book_id.title }}" />
-                </div>
-
-            </div>
-
-        </div>
-
-    </article>
+    </div>
     {% endfor %}
-</section>
+</div>
 
 {% endblock %}
