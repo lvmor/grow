@@ -24,7 +24,7 @@ This app was made for people to set reading goals, track their progress (based o
 <img width="669" alt="Grow-ERD" src="https://user-images.githubusercontent.com/46200110/56025016-26751c80-5cc6-11e9-9f4d-3fb5fc6b33bc.png">
 
 ## Website
-<img width="1405" alt="grow-website" src="https://user-images.githubusercontent.com/46200110/56025446-faa66680-5cc6-11e9-85cd-f14907097a21.png">
+<img width="1395" alt="grow-website" src="https://user-images.githubusercontent.com/46200110/56040669-c8f3c680-5ceb-11e9-9e32-3626c5fb52fb.png">
 
 ## Existing Features
 
@@ -59,8 +59,9 @@ Changes I would make to this project if I continued to work on it:
 
 ---
 
-##### Screenshot
+##### Code Screenshot
 
+<img width="1152" alt="snippet_of_code" src="https://user-images.githubusercontent.com/46200110/56040753-f6d90b00-5ceb-11e9-826b-4cd270c5c07a.png">
 
 ---
 
