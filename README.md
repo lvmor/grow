@@ -79,7 +79,7 @@ Wins
 - Achievements Page.
 - Data Visualization Charts.
 
-#### Biggest Wins and Challenges
+#### Shoutouts
 - Cara & Vic (UX design)
 - Heggy & Christina (Deployment)
 - Brock (User Flow for Books and My Library)
