@@ -67,16 +67,22 @@ Changes I would make to this project if I continued to work on it:
 
 #### Biggest Wins and Challenges
 
+Challenges
+
+- External API.
+- Refactoring.
+- Data Visualization Charts.
+
 Wins
 
 - External API.
 - Achievements Page.
 - Data Visualization Charts.
 
-Challenges
-
-- External API.
-- Refactoring.
-- Data Visualization Charts.
+#### Biggest Wins and Challenges
+- Cara & Vic (UX design)
+- Heggy & Christina (Deployment)
+- Brock (User Flow for Books and My Library)
+- Luis (Puzzle Piecesmy )
 
 ---
