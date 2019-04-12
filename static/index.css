@@ -1,6 +1,18 @@
 * {
   font-family: Raleway, serif
 }
+
+/* ----------------------------------------
+General Styles
+------------------------------------------- */
+
+.main-header-text {
+  font-weight: 900;
+  font-size: 2.5em;
+  margin-top: .5em;
+  text-align: center;
+}
+
 /* ----------------------------------------
 Navigation Bar
 ------------------------------------------- */
